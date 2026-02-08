@@ -10,14 +10,14 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("Stack Size Controller", "AnExiledDev/optimized by WouayNote", "4.1.3")]
+    [Info("Stack Size Controller", "AnExiledDev/optimized by WouayNote+TeaPack", "4.1.3")]
     [Description("Allows configuration of most items max stack size.")]
     class StackSizeController : CovalencePlugin
     {
         [PluginReference]
         Plugin AirFuel, GetToDaChoppa, VehicleVendorOptions;
 
-        private const string _vanillaDefaultsUri = "https://raw.githubusercontent.com/WouayNote/StackSizeController/master/vanilla-defaults.json";
+        private const string _vanillaDefaultsUri = "https://raw.githubusercontent.com/Teapack89/StackSizeController/master/vanilla-defaults.json";
 
         private Configuration _config;
         private Dictionary<string, int> _vanillaDefaults;
@@ -283,7 +283,7 @@ namespace Oxide.Plugins
                     || heli.StartingFuelUnits() != -1)
                     return;
 
-                var fuelItem = heli.GetFuelSystem()?.GetFuelItem();
+                var fuelItem = (heli.GetFuelSystem() as EntityFuelSystem)?.GetFuelItem();
                 if (fuelItem == null
                     // Ignore other types of fuel since they will have been placed by mods.
                     || fuelItem.info.shortname != "lowgradefuel"
